@@ -25,7 +25,17 @@ import {
 import { useRef, useState, useEffect, useMemo } from "react";
 import { VscMute, VscUnmute } from "react-icons/vsc";
 import { Duration } from "./Duration";
-import { FiBookmark, FiDownload, FiEye, FiInfo, FiMoreHorizontal, FiShare, FiShoppingCart, FiLock, FiX } from "react-icons/fi";
+import {
+  FiBookmark,
+  FiDownload,
+  FiEye,
+  FiInfo,
+  FiMoreHorizontal,
+  FiShare,
+  FiShoppingCart,
+  FiLock,
+  FiX,
+} from "react-icons/fi";
 import { FaCirclePause, FaCirclePlay } from "react-icons/fa6";
 import MembershipPrompt from "../profile/MembershipPrompt";
 
@@ -39,7 +49,15 @@ type Props = {
   accesslevel: number;
 };
 
-export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_length, accesslevel }: Props) => {
+export const AudioPlayer = ({
+  url,
+  title,
+  author,
+  thumbnail,
+  hasaccess,
+  meta_length,
+  accesslevel,
+}: Props) => {
   const playerRef = useRef<ReactPlayer | null>(null);
   const [finished, setFinished] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
@@ -75,12 +93,15 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
     playerRef.current?.seekTo(parseFloat(e.target.value));
     setSeeking(false);
   };
-  const handleChangeInVolume = (e: React.ChangeEvent<HTMLInputElement>) => handleVolumeChange(Number(e.target.value));
+  const handleChangeInVolume = (e: React.ChangeEvent<HTMLInputElement>) =>
+    handleVolumeChange(Number(e.target.value));
   const [showModal, setShowModal] = useState(false);
   const [showModalState, setShowModalState] = useState(false);
 
   useMemo(() => {
-    setPlayed((prevPlayed) => (!seeking && prevPlayed !== progress ? progress : prevPlayed));
+    setPlayed((prevPlayed) =>
+      !seeking && prevPlayed !== progress ? progress : prevPlayed
+    );
   }, [progress, seeking]);
 
   useEffect(() => playPauseButtonRef.current?.focus(), []);
@@ -96,7 +117,12 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
 
   return (
     <>
-      {showModal && <MembershipPrompt accesslevel={accesslevel} onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <MembershipPrompt
+          accesslevel={accesslevel}
+          onClose={() => setShowModal(false)}
+        />
+      )}
 
       <Box display={"none"}>
         <ReactPlayer
@@ -135,9 +161,9 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
           gap={{ base: "10px", sm: "0px" }}
         >
           <Box p="10px" cursor={"pointer"} color="#fff" fontSize={"22px"}>
-            {/* <FiShoppingCart /> */}
+            <FiShoppingCart />
           </Box>
-          {/* 
+
           <Menu>
             <MenuButton p="10px" as={Box} cursor={"pointer"}>
               <FiMoreHorizontal fontSize={"28px"} color="#fff" />
@@ -164,11 +190,22 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
               </MenuItem>
             </MenuList>
           </Menu>
-          */}
         </HStack>
-        <Flex w={{ base: "100%", sm: "30%" }} position={"relative"} justifyContent={"center"}>
+        <Flex
+          w={{ base: "100%", sm: "30%" }}
+          position={"relative"}
+          justifyContent={"center"}
+        >
           {url != "" && (
-            <Box position={"absolute"} top="50%" left="50%" transform="translate(-50%, -50%)" borderRadius="100px" bg="#fff" zIndex={"1"}>
+            <Box
+              position={"absolute"}
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              borderRadius="100px"
+              bg="#fff"
+              zIndex={"1"}
+            >
               {playing ? (
                 <FaCirclePause {...iconStyles} onClick={togglePlayAndPause} />
               ) : (
@@ -224,16 +261,37 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
                   border="0px solid #fff"
                 >
                   <FiEye />
-                  <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset="slideInBottom">
+                  <Modal
+                    isCentered
+                    onClose={onClose}
+                    isOpen={isOpen}
+                    motionPreset="slideInBottom"
+                  >
                     <ModalOverlay />
                     <ModalContent maxW={"90%"}>
-                      <HStack top="10px" position="absolute" justifyContent={"space-between"} w="100%" px="10px">
+                      <HStack
+                        top="10px"
+                        position="absolute"
+                        justifyContent={"space-between"}
+                        w="100%"
+                        px="10px"
+                      >
                         <Text color="#fff" fontWeight={"bold"}>
                           Track Artwork
                         </Text>
-                        <FiX cursor={"pointer"} color="#fff" onClick={onClose} fontSize="25px" />
+                        <FiX
+                          cursor={"pointer"}
+                          color="#fff"
+                          onClick={onClose}
+                          fontSize="25px"
+                        />
                       </HStack>
-                      <Image src={thumbnail} width="100%" height="100%" objectFit={"cover"} />
+                      <Image
+                        src={thumbnail}
+                        width="100%"
+                        height="100%"
+                        objectFit={"cover"}
+                      />
                     </ModalContent>
                   </Modal>
                 </Flex>
@@ -242,34 +300,36 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
           </Flex>
         </Flex>
         <VStack w={{ base: "100%", sm: "65%" }}>
-          {/* 
           <Text
             lineHeight={"1em"}
-            fontSize={"14px"}
-            fontWeight="700"
+            fontSize={"20px"}
+            fontWeight="600"
             color="#fff"
-            px="8px"
-            py={"7px"}
-            borderRadius={"10px"}
-            bg="#111"
-            display="flex"
-            alignItems="center"
-            gap="5px"
+            pb="4px"
           >
-            <FiUnlock />
-            30-SECOND PREVIEW
-          </Text>
-          */}
-          <Text lineHeight={"1em"} fontSize={"20px"} fontWeight="600" color="#fff" pb="4px">
             {title}
           </Text>
-          <Text lineHeight={"1em"} fontSize={"15px"} fontWeight="500" color="#fff">
+          <Text
+            lineHeight={"1em"}
+            fontSize={"15px"}
+            fontWeight="500"
+            color="#fff"
+          >
             {author}
           </Text>
-          <HStack mb="-10px" pr={{ base: "none", md: "10px" }} justifyContent={"space-between"} gap="0px" w="100%">
+          <HStack
+            mb="-10px"
+            pr={{ base: "none", md: "10px" }}
+            justifyContent={"space-between"}
+            gap="0px"
+            w="100%"
+          >
             <Flex pl={{ base: "10px", md: "none" }} pr="15px" color="#fff">
               <Duration seconds={duration * played} />{" "}
-              <Text as="span" style={{ paddingLeft: "4px", paddingRight: "4px" }}>
+              <Text
+                as="span"
+                style={{ paddingLeft: "4px", paddingRight: "4px" }}
+              >
                 /
               </Text>{" "}
               <Duration seconds={meta_length} />
@@ -283,10 +343,16 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
               focusThumbOnChange={false}
               onChangeStart={handleSeekMouseDown}
               onChange={(value) => setPlayed(value)}
-              onChangeEnd={(value) => handleSeekMouseUp({ target: { value: value.toString() } })}
+              onChangeEnd={(value) =>
+                handleSeekMouseUp({ target: { value: value.toString() } })
+              }
             >
               <SliderTrack minH={"6px"} maxH="6px">
-                <SliderFilledTrack minH={"6px"} maxH="6px" bgGradient="linear(to-r, #92fe9d, #00c9ff )" />
+                <SliderFilledTrack
+                  minH={"6px"}
+                  maxH="6px"
+                  bgGradient="linear(to-r, #92fe9d, #00c9ff )"
+                />
               </SliderTrack>
               <SliderThumb
                 opacity={"0"}
@@ -300,8 +366,21 @@ export const AudioPlayer = ({ url, title, author, thumbnail, hasaccess, meta_len
               ></SliderThumb>
             </Slider>
 
-            <Flex position="relative" p="0" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} ml="4px">
-              <Button p="0px" bg="transparent" _hover={{ bg: "transparent" }} onClick={toggleMute} color="#fff" fontSize={"20px"}>
+            <Flex
+              position="relative"
+              p="0"
+              onMouseEnter={() => setShow(true)}
+              onMouseLeave={() => setShow(false)}
+              ml="4px"
+            >
+              <Button
+                p="0px"
+                bg="transparent"
+                _hover={{ bg: "transparent" }}
+                onClick={toggleMute}
+                color="#fff"
+                fontSize={"20px"}
+              >
                 {muted ? <VscMute /> : <VscUnmute />}
               </Button>
               {show && (
