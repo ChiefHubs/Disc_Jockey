@@ -1,0 +1,13 @@
+.str-chat__list--thread > div > .str-chat__ul {
+  display: none;
+}
+
+.str-chat__list-notifications {
+  display: none;
+}
+
+.str-chat__parent-message-li {
+  border: none !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}

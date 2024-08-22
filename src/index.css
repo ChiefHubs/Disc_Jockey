@@ -1,0 +1,86 @@
+.rhap_container {
+  background: #333;
+}
+
+.rhap_progress-filled {
+  background: #bd24ed;
+}
+
+.rhap_download-progress {
+  background: #1cc4c4;
+}
+
+.rhap_time {
+  color: #fff;
+}
+
+.rhap_play-pause-button {
+  color: #fff;
+}
+
+.ProfileHeader {
+  position: relative;
+  background-size: cover;
+}
+
+.ProfileHeader::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+body, #root {
+  height: 100vh !important;
+}
+
+.image-gallery-content:not(.fullscreen) .image-gallery-image {
+  max-height:400px !important;   
+}
+
+.gradient-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #5c03bc, #e536ab);
+  background-size: 200% 200%;
+  cursor: pointer;
+  outline: none;
+  transition: background 1s;
+  animation: gradient-animation 5s infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-button:hover {
+  background: linear-gradient(90deg, #5c03bc, #e536ab, #5c03bc, #e536ab);
+  background-size: 200% 200%;
+  animation: gradient-animation-hover 4s infinite;
+}
+
+@keyframes gradient-animation-hover {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
