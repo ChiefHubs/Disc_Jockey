@@ -1,11 +1,28 @@
-import { Box, Card, CardHeader, CardBody, Flex, List, ListIcon, ListItem, Text, CardFooter, Heading, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardHeader,
+  CardBody,
+  Flex,
+  List,
+  ListIcon,
+  ListItem,
+  Text,
+  CardFooter,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
 
 import React, { useState } from "react";
-import { FaCheckCircle, FaTimesCircle, FaArrowRight, FaCheck } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaTimesCircle,
+  FaArrowRight,
+  FaCheck,
+} from "react-icons/fa";
 import { getPurchaseLink } from "../../../hooks/useProfile";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
-import { BiSolidLockOpen } from "react-icons/bi";
 import { useCookies } from "react-cookie";
 import CreateFreeAccount from "../Buttons/CreateFreeAccount";
 
@@ -15,7 +32,11 @@ interface Props {
   urlLocation?: string;
 }
 
-export default function GoldMembership({ showAll = true, memberOf = "", urlLocation = "" }: Props) {
+export default function GoldMembership({
+  showAll = true,
+  memberOf = "",
+  urlLocation = "",
+}: Props) {
   const [showFullContentInit, setShowFullContentInit] = useState(showAll);
   const [showFullContent, setShowFullContent] = useState(showAll);
   const { data: user } = useUser();
@@ -29,7 +50,11 @@ export default function GoldMembership({ showAll = true, memberOf = "", urlLocat
   };
 
   const handleClickPurchase = async () => {
-    const purchaseLink = await getPurchaseLink((username as string) || (memberOf as string), "gold", urlLocation);
+    const purchaseLink = await getPurchaseLink(
+      (username as string) || (memberOf as string),
+      "gold",
+      urlLocation
+    );
     if (purchaseLink) {
       window.open(purchaseLink, "_self");
     } else {
@@ -64,21 +89,47 @@ export default function GoldMembership({ showAll = true, memberOf = "", urlLocat
 
   return (
     <>
-      <Card w="350px" height="100%" align="center" overflow="hidden" borderRadius="15px">
+      <Card
+        w="350px"
+        height="100%"
+        align="center"
+        overflow="hidden"
+        borderRadius="15px"
+      >
         <CardHeader pt="25px" pb="10px" m="0" w="full" justifyContent="center">
-          <Text fontWeight="600" textAlign="center" fontSize={{ base: "20px", md: "24px" }} color="#111111">
+          <Text
+            fontWeight="600"
+            textAlign="center"
+            fontSize={{ base: "20px", md: "24px" }}
+            color="#111111"
+          >
             Gold Membership
           </Text>
           <Flex justifyContent="center" gap="5px" align="center">
             <Text display="flex" alignItems="center">
-              <Box as="span" fontSize={{ base: "22px", md: "24px" }} fontWeight="400">
+              <Box
+                as="span"
+                fontSize={{ base: "22px", md: "24px" }}
+                fontWeight="400"
+              >
                 $
               </Box>
-              <Box as="span" fontSize={{ base: "28px", md: "30px" }} fontWeight="600" paddingTop="10px" paddingBottom="10px">
+              <Box
+                as="span"
+                fontSize={{ base: "28px", md: "30px" }}
+                fontWeight="600"
+                paddingTop="10px"
+                paddingBottom="10px"
+              >
                 5.00
               </Box>
             </Text>
-            <Text fontSize={{ base: "12px", md: "12px" }} color="#999999" fontWeight="600" mb={{ base: "-12px", md: "-12px" }}>
+            <Text
+              fontSize={{ base: "12px", md: "12px" }}
+              color="#999999"
+              fontWeight="600"
+              mb={{ base: "-12px", md: "-12px" }}
+            >
               / MONTH
             </Text>
           </Flex>
@@ -86,21 +137,40 @@ export default function GoldMembership({ showAll = true, memberOf = "", urlLocat
 
         {!showFullContentInit && (
           <Box style={{ paddingBottom: "12px" }}>
-            <Button onClick={toggleContent}>{showFullContent ? "Show less" : "View more"}</Button>
+            <Button onClick={toggleContent}>
+              {showFullContent ? "Show less" : "View more"}
+            </Button>
           </Box>
         )}
 
         {showFullContent && (
-          <CardBody display="flex" flexDirection="column" alignContent="center" p="0" pb="25px">
+          <CardBody
+            display="flex"
+            flexDirection="column"
+            alignContent="center"
+            p="0"
+            pb="25px"
+          >
             <Text color="#8553f4" pb="10px" textAlign="center" fontWeight="600">
               <i>What you get?</i>
             </Text>
             <List spacing={4} w="100%">
               {items.map((item) => (
-                <ListItem key={item} display="flex" flexDirection="row" alignItems="center">
+                <ListItem
+                  key={item}
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                >
                   <ListIcon
-                    as={strikeThroughItems.includes(item) ? FaTimesCircle : FaCheckCircle}
-                    color={strikeThroughItems.includes(item) ? "#FF7777s" : "#22F07E"}
+                    as={
+                      strikeThroughItems.includes(item)
+                        ? FaTimesCircle
+                        : FaCheckCircle
+                    }
+                    color={
+                      strikeThroughItems.includes(item) ? "#FF7777s" : "#22F07E"
+                    }
                   />
                   {strikeThroughItems.includes(item) ? (
                     <Box as="s" color="gray.400">
@@ -155,7 +225,14 @@ export default function GoldMembership({ showAll = true, memberOf = "", urlLocat
         )}
 
         {!isUserLoggedIn && (
-          <CardFooter borderTop="1px solid black" bg="#8553f4" w="full" py="20px" justifyContent="center" cursor="pointer">
+          <CardFooter
+            borderTop="1px solid black"
+            bg="#8553f4"
+            w="full"
+            py="20px"
+            justifyContent="center"
+            cursor="pointer"
+          >
             <Heading
               display="flex"
               flexDirection="row"
@@ -166,7 +243,7 @@ export default function GoldMembership({ showAll = true, memberOf = "", urlLocat
             >
               <Box fontSize={{ base: "14px", md: "16px" }}>
                 <CreateFreeAccount />
-                {/* 
+
                 <Button
                   borderRadius="5px"
                   leftIcon={<BiSolidLockOpen />}
@@ -184,7 +261,6 @@ export default function GoldMembership({ showAll = true, memberOf = "", urlLocat
                 >
                   Create free account
                 </Button>
-                */}
               </Box>
             </Heading>
           </CardFooter>

@@ -58,13 +58,20 @@ export default function ForceSignUpInPrompt() {
         style={{ margin: "0px", maxWidth: "100%" }}
       >
         <VStack w="100%">
-          {/*
           <Flex position="absolute" right="10px" top="10px">
-            <FiX color="#fff" onClick={() => setModalVisible(false)} fontSize="30px" cursor="pointer" />
+            <FiX
+              color="#fff"
+              onClick={() => setModalVisible(false)}
+              fontSize="30px"
+              cursor="pointer"
+            />
           </Flex>
-          */}
+
           <VStack bg="#111" w="100%" py="15px">
-            <Image w="140px" src="https://files.djfan.app/images/logo/DJFAN_HOR_WHITE.svg" />
+            <Image
+              w="140px"
+              src="https://files.djfan.app/images/logo/DJFAN_HOR_WHITE.svg"
+            />
           </VStack>
           <VStack pt="20px" pb="25px">
             {/*
@@ -83,10 +90,16 @@ export default function ForceSignUpInPrompt() {
               _hover={{ bg: "#fff" }}
               onClick={() => {
                 let href = window.location.href.toString();
-                setCookie("dj_page", href.indexOf("artist") > 0 ? href.split("/").pop()?.split("?")[0] : "", {
-                  path: "/",
-                  domain: ".djfan.app",
-                });
+                setCookie(
+                  "dj_page",
+                  href.indexOf("artist") > 0
+                    ? href.split("/").pop()?.split("?")[0]
+                    : "",
+                  {
+                    path: "/",
+                    domain: ".djfan.app",
+                  }
+                );
                 setCookie("redirect_page", href, {
                   path: "/",
                   domain: ".djfan.app",
@@ -99,7 +112,8 @@ export default function ForceSignUpInPrompt() {
                     eventTimeout: 1000,
                     eventCallback: function (id: string) {
                       if (id == "GTM-MXLNMK2") {
-                        window.location.href = import.meta.env.VITE_DJFAN_SIGN_IN_URL;
+                        window.location.href =
+                          import.meta.env.VITE_DJFAN_SIGN_IN_URL;
                       }
                     },
                   });
@@ -110,7 +124,13 @@ export default function ForceSignUpInPrompt() {
             >
               SIGN IN
             </Button>
-            <Heading fontSize="22px" borderRadius="5px" lineHeight="1em" fontWeight="600" style={{ padding: "20px" }}>
+            <Heading
+              fontSize="22px"
+              borderRadius="5px"
+              lineHeight="1em"
+              fontWeight="600"
+              style={{ padding: "20px" }}
+            >
               OR
             </Heading>
             <Button
@@ -125,10 +145,16 @@ export default function ForceSignUpInPrompt() {
               _hover={{ bgGradient: "linear(to-r,#e536ab, #5c03bc)" }}
               onClick={() => {
                 let href = window.location.href.toString();
-                setCookie("dj_page", href.indexOf("artist") > 0 ? href.split("/").pop()?.split("?")[0] : "", {
-                  path: "/",
-                  domain: ".djfan.app",
-                });
+                setCookie(
+                  "dj_page",
+                  href.indexOf("artist") > 0
+                    ? href.split("/").pop()?.split("?")[0]
+                    : "",
+                  {
+                    path: "/",
+                    domain: ".djfan.app",
+                  }
+                );
                 setCookie("redirect_page", href, {
                   path: "/",
                   domain: ".djfan.app",
@@ -141,7 +167,8 @@ export default function ForceSignUpInPrompt() {
                     user_type: "fan",
                     eventTimeout: 1000,
                     eventCallback: function () {
-                      window.location.href = import.meta.env.VITE_DJFAN_SIGN_UP_URL;
+                      window.location.href =
+                        import.meta.env.VITE_DJFAN_SIGN_UP_URL;
                     },
                   });
                 } else {
@@ -151,28 +178,50 @@ export default function ForceSignUpInPrompt() {
             >
               SIGN UP
             </Button>
-            <Heading fontSize="22px" borderRadius="5px" lineHeight="1em" fontWeight="600" style={{ padding: "20px" }}>
+            <Heading
+              fontSize="22px"
+              borderRadius="5px"
+              lineHeight="1em"
+              fontWeight="600"
+              style={{ padding: "20px" }}
+            >
               to get access to
             </Heading>
 
             <Flex style={{ display: "flex" }}>
               <List spacing={4} w="100%">
                 {items.map((item) => (
-                  <ListItem key={item} display="flex" flexDirection="row" alignItems="center">
+                  <ListItem
+                    key={item}
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                  >
                     <ListIcon as={FaCheckCircle} color="#22F07E" />
                     {item}
                   </ListItem>
                 ))}
               </List>
             </Flex>
-            <Heading fontSize="14px" borderRadius="5px" lineHeight="1em" fontWeight="200" style={{ paddingTop: "40px" }}>
+            <Heading
+              fontSize="14px"
+              borderRadius="5px"
+              lineHeight="1em"
+              fontWeight="200"
+              style={{ paddingTop: "40px" }}
+            >
               We don't send any non transactional emails (spam).
             </Heading>
 
-            {/*
-            <Heading fontSize="18px" borderRadius="5px" lineHeight="1em" fontWeight="600" mt="20px">
+            <Heading
+              fontSize="18px"
+              borderRadius="5px"
+              lineHeight="1em"
+              fontWeight="600"
+              mt="20px"
+            >
               Why create a free account?
-            </Heading>            
+            </Heading>
             <List spacing={2}>
               <ListItem>
                 <ListIcon as={FiCheck} color="green.500" />
@@ -191,7 +240,6 @@ export default function ForceSignUpInPrompt() {
                 30-seconds to sign up
               </ListItem>
             </List>
-            */}
           </VStack>
         </VStack>
       </ModalContent>
