@@ -23,6 +23,7 @@ import {
 import { getPurchaseLink } from "../../../hooks/useProfile";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
+import { BiSolidLockOpen } from "react-icons/bi";
 import { useCookies } from "react-cookie";
 import CreateFreeAccount from "../Buttons/CreateFreeAccount";
 
@@ -243,7 +244,7 @@ export default function GoldMembership({
             >
               <Box fontSize={{ base: "14px", md: "16px" }}>
                 <CreateFreeAccount />
-
+                {/* 
                 <Button
                   borderRadius="5px"
                   leftIcon={<BiSolidLockOpen />}
@@ -261,6 +262,7 @@ export default function GoldMembership({
                 >
                   Create free account
                 </Button>
+                */}
               </Box>
             </Heading>
           </CardFooter>

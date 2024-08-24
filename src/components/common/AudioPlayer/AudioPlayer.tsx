@@ -161,9 +161,9 @@ export const AudioPlayer = ({
           gap={{ base: "10px", sm: "0px" }}
         >
           <Box p="10px" cursor={"pointer"} color="#fff" fontSize={"22px"}>
-            <FiShoppingCart />
+            {/* <FiShoppingCart /> */}
           </Box>
-
+          {/* 
           <Menu>
             <MenuButton p="10px" as={Box} cursor={"pointer"}>
               <FiMoreHorizontal fontSize={"28px"} color="#fff" />
@@ -190,6 +190,7 @@ export const AudioPlayer = ({
               </MenuItem>
             </MenuList>
           </Menu>
+          */}
         </HStack>
         <Flex
           w={{ base: "100%", sm: "30%" }}
@@ -300,6 +301,24 @@ export const AudioPlayer = ({
           </Flex>
         </Flex>
         <VStack w={{ base: "100%", sm: "65%" }}>
+          {/* 
+          <Text
+            lineHeight={"1em"}
+            fontSize={"14px"}
+            fontWeight="700"
+            color="#fff"
+            px="8px"
+            py={"7px"}
+            borderRadius={"10px"}
+            bg="#111"
+            display="flex"
+            alignItems="center"
+            gap="5px"
+          >
+            <FiUnlock />
+            30-SECOND PREVIEW
+          </Text>
+          */}
           <Text
             lineHeight={"1em"}
             fontSize={"20px"}

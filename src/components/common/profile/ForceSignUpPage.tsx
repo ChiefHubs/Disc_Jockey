@@ -1,12 +1,20 @@
 import {
   Flex,
+  Box,
   Heading,
+  Image,
+  HStack,
   VStack,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
   List,
   ListItem,
   ListIcon,
 } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
+import { FiX, FiCheck } from "react-icons/fi";
 import { useCookies } from "react-cookie";
 import { FaCheckCircle, FaCheck } from "react-icons/fa";
 
@@ -126,6 +134,33 @@ export default function ForceSignUpInPage({
           >
             LOG IN
           </Button>
+
+          {view == "artist" && (
+            <>
+              <Heading
+                fontSize="1.3em"
+                fontWeight="400"
+                style={{ paddingTop: "30px", paddingBottom: "12px" }}
+              >
+                Get access to my
+              </Heading>
+              <Flex style={{ display: "flex" }}>
+                <List spacing={4} w="100%">
+                  {items.map((item) => (
+                    <ListItem
+                      key={item}
+                      display="flex"
+                      flexDirection="row"
+                      alignItems="center"
+                    >
+                      <ListIcon as={FaCheckCircle} color="#22F07E" />
+                      {item}
+                    </ListItem>
+                  ))}
+                </List>
+              </Flex>
+            </>
+          )}
         </VStack>
       </VStack>
     </Flex>

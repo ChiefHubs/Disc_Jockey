@@ -58,15 +58,11 @@ export default function ForceSignUpInPrompt() {
         style={{ margin: "0px", maxWidth: "100%" }}
       >
         <VStack w="100%">
+          {/*
           <Flex position="absolute" right="10px" top="10px">
-            <FiX
-              color="#fff"
-              onClick={() => setModalVisible(false)}
-              fontSize="30px"
-              cursor="pointer"
-            />
+            <FiX color="#fff" onClick={() => setModalVisible(false)} fontSize="30px" cursor="pointer" />
           </Flex>
-
+          */}
           <VStack bg="#111" w="100%" py="15px">
             <Image
               w="140px"
@@ -213,15 +209,10 @@ export default function ForceSignUpInPrompt() {
               We don't send any non transactional emails (spam).
             </Heading>
 
-            <Heading
-              fontSize="18px"
-              borderRadius="5px"
-              lineHeight="1em"
-              fontWeight="600"
-              mt="20px"
-            >
+            {/*
+            <Heading fontSize="18px" borderRadius="5px" lineHeight="1em" fontWeight="600" mt="20px">
               Why create a free account?
-            </Heading>
+            </Heading>            
             <List spacing={2}>
               <ListItem>
                 <ListIcon as={FiCheck} color="green.500" />
@@ -240,6 +231,7 @@ export default function ForceSignUpInPrompt() {
                 30-seconds to sign up
               </ListItem>
             </List>
+            */}
           </VStack>
         </VStack>
       </ModalContent>
