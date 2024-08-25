@@ -164,11 +164,7 @@ const RightSidebarModal = ({
                           country.country_code
                         )
                       }
-                    >
-                      <p color="white" style={{ "text-wrap": "wrap" }}>
-                        {country.country}
-                      </p>
-                    </Button>
+                    ></Button>
                   );
                 })}
               </Flex>
@@ -197,41 +193,10 @@ const RightSidebarModal = ({
                 showSelectionPreview={true}
                 showDateDisplay={false}
               />
-              <Flex justifyContent={"space-around"}>
-                <Button
-                  colorScheme="transparent"
-                  border="2px"
-                  borderColor="green.500"
-                  borderRadius="20px"
-                  onClick={() => resetDate()}
-                >
-                  {`Reset`}
-                </Button>
-                <Button
-                  colorScheme="transparent"
-                  border="2px"
-                  borderColor="green.500"
-                  borderRadius="20px"
-                  onClick={() => showResult()}
-                >
-                  {`Show ${result} Result`}
-                </Button>
-              </Flex>
             </>
           )}
         </VStack>
       </Box>
-      {/* <Box
-        position="fixed"
-        top={0}
-        zIndex={99}
-        width={"100%"}
-        height={"100%"}
-        backgroundColor={"black"}
-        opacity={0.5}
-      >
-        fdsa
-      </Box> */}
     </>
   );
 };

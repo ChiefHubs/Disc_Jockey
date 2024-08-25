@@ -1,4 +1,12 @@
-import { Button, SimpleGrid, Container, Heading, CircularProgress, Box, Flex } from "@chakra-ui/react";
+import {
+  Button,
+  SimpleGrid,
+  Container,
+  Heading,
+  CircularProgress,
+  Box,
+  Flex,
+} from "@chakra-ui/react";
 import * as React from "react";
 import { CardWithAvatar } from "../common/explore/CardWithAvatar";
 import { UserInfo } from "../common/explore/UserInfo";
@@ -7,15 +15,32 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const Venues = () => {
   const pageSize = 16;
-  const { data: explores, fetchNextPage, hasNextPage } = useVenues({ pageSize });
+  const {
+    data: explores,
+    fetchNextPage,
+    hasNextPage,
+  } = useVenues({ pageSize });
 
   const handleLoadMore = () => {
     fetchNextPage();
   };
 
   return (
-    <Container maxW="full" minH="1000px" bg="white" pb="20px" px={{ base: "0", sm: "8" }}>
-      <Flex justifyContent="center" alignItems="center" mx={{ base: "0", sm: "-8" }} mb="20px" py="5px" bgColor="rgb(133, 83, 244)">
+    <Container
+      maxW="full"
+      minH="1000px"
+      bg="white"
+      pb="10px"
+      px={{ base: "0", sm: "8" }}
+    >
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        mx={{ base: "0", sm: "-8" }}
+        mb="20px"
+        py="5px"
+        bgColor="rgb(133, 83, 244)"
+      >
         <Heading color="white">Venues</Heading>
       </Flex>
       <InfiniteScroll
@@ -28,11 +53,20 @@ const Venues = () => {
           </Box>
         }
       >
-        <SimpleGrid columns={{ base: 1, md: 2, "2xl": 4 }} spacing="10" margin="2px">
+        <SimpleGrid
+          columns={{ base: 1, md: 2, "2xl": 4 }}
+          spacing="10"
+          margin="2px"
+        >
           {explores?.pages.map((page, index) => (
             <React.Fragment key={index}>
               {page.map((venue) => {
-                const { url: url, name: name, photo: photo, logo: logo } = venue;
+                const {
+                  url: url,
+                  name: name,
+                  photo: photo,
+                  logo: logo,
+                } = venue;
                 return (
                   <CardWithAvatar
                     margin="2px"
@@ -44,7 +78,7 @@ const Venues = () => {
                     }}
                     coverBg={photo}
                   >
-                    <UserInfo mt="3" name={name} />
+                    <UserInfo mt="2" name={name} />
                     <Button
                       colorScheme="purple"
                       rounded="full"
