@@ -46,10 +46,7 @@ djprofile.get = async function (profile_url = "", callback) {
       LIMIT 1`,
       [profile_url]
     );
-      /**       profile_dj.viewable = 1
-          AND
-      */
-    /* query where publish = active ? additional to active user  */
+      
     if (rows.length == 0) 
     { 
       callback(false);    
@@ -58,7 +55,7 @@ djprofile.get = async function (profile_url = "", callback) {
     {
       rows[0].about_me = rows[0].about_me.toString().replace(/(?:\r\n|\r|\n)/g, '<br />');
       rows[0].profile_picture = config.nodeserver.r2_s3_domain + rows[0].profile_picture;
-      rows[0].cover_photo = config.nodeserver.r2_s3_domain + rows[0].cover_photo;
+      rows[0].cover_photo = config.nodeserver.r2_s3_domain + rows[0].avatar;
       serverCache.set( rows[0].profile_url , rows[0].user_id); 
       callback(rows);
     }
@@ -150,7 +147,7 @@ djprofile.getDjProfiles = async function(params = {}, callback) {
         WHERE
           profile_dj.viewable = 1
             AND
-          user.active=1
+          user.active=0
             AND  
           profile_picture_cache <> 'error' 
             AND 
