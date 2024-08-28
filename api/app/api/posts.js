@@ -43,7 +43,7 @@ posts.get = async function (dj_user_id=0, params={}, callback) {
   let queryWhere = "";
   if (params.type.length>0 && params.type!='0') {
     params.type = params.type.toString().replace(/[^0-9,]/g, '');
-    queryWhere += ` OR posts.posttype_id IN (${params.type}) `; 
+    queryWhere += ` AND posts.posttype_id IN (${params.type}) `; 
   }  
   if (params.post_id>0) {
     queryWhere += ` AND posts.id = '${params.post_id}' `; 
@@ -113,7 +113,7 @@ posts.get = async function (dj_user_id=0, params={}, callback) {
         ${config.nodeserver.db_djfan}.user
       ON
         user.id=posts.user_id        
-      INNER LEFT JOIN
+      INNER JOIN
         ${config.nodeserver.db_djfan}.profile_dj    
       ON
         profile_dj.user_id = posts.user_id
@@ -182,6 +182,9 @@ posts.get = async function (dj_user_id=0, params={}, callback) {
               if (row.accesslevel_id>1 && (stimeNow + config.nodeserver.surl_time_margin > row.image[ii].stime || row.image[ii].surl == null) && row.image[ii].location.length>0) {
                   cloudflareParams.key = row.image[ii].location;                                
                   row.image[ii].surl = await cloudflare.getSignedUrl(cloudflareParams);
+                  row.image[ii].stime = stimeNow + 600;
+                  mediaUpdate['image'][row.image[ii].id] = {"surl":row.image[ii].surl,"stime":row.image[ii].stime}; 
+                  row.image[ii].location = row.image[ii].surl;
               }
 
               if (row.image[ii].location!=null){
@@ -192,6 +195,7 @@ posts.get = async function (dj_user_id=0, params={}, callback) {
 
               delete row.image[ii].surl;
               delete row.image[ii].stime;
+              delete row.image[ii].id;
               delete row.image[ii].sample;
             }   
           }
@@ -216,7 +220,7 @@ posts.get = async function (dj_user_id=0, params={}, callback) {
                   cloudflareParams.key = row.video[ii].location;                                   
                   row.video[ii].surl = await cloudflare.getSignedUrl(cloudflareParams);
                   row.video[ii].stime = stimeNow + 600;
-                  mediaUpdate['media'][row.video[ii].id] = {"surl":row.video[ii].surl,"stime":row.video[ii].stime}; 
+                  mediaUpdate['video'][row.video[ii].id] = {"surl":row.video[ii].surl,"stime":row.video[ii].stime}; 
                   row.video[ii].location = row.video[ii].surl;
               }
               

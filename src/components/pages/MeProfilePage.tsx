@@ -77,6 +77,33 @@ const MeProfilePage = () => {
             {user?.display_name && user.display_name}
           </Text>
         </Center>
+
+        <Tabs
+          variant="unstyled"
+          isLazy
+          isFitted
+          onChange={onChange}
+          index={activeTab}
+        >
+          <TabList bgColor="white" borderRadius={15}>
+            {menus.map((tab, index) => (
+              <Tab key={index} _selected={{ color: "purple" }}>
+                <Text py="1">{tab.name}</Text>
+              </Tab>
+            ))}
+          </TabList>
+          <TabPanels mt={5} bgColor="white" borderRadius={15}>
+            <TabPanel>
+              <Account onChangeUsername={onChangeUsername} />
+            </TabPanel>
+            <TabPanel>
+              <Purchases />
+            </TabPanel>
+            <TabPanel>
+              <Subscriptions />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </Flex>
     </Flex>
   );

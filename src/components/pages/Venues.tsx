@@ -30,7 +30,7 @@ const Venues = () => {
       maxW="full"
       minH="1000px"
       bg="white"
-      pb="10px"
+      pb="20px"
       px={{ base: "0", sm: "8" }}
     >
       <Flex
@@ -78,7 +78,7 @@ const Venues = () => {
                     }}
                     coverBg={photo}
                   >
-                    <UserInfo mt="2" name={name} />
+                    <UserInfo mt="3" name={name} />
                     <Button
                       colorScheme="purple"
                       rounded="full"
