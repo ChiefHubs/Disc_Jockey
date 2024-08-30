@@ -1,7 +1,7 @@
 const winston = require("winston");
 const config = require("../config");
 const errorlog = require("./errorlog");
-const axios = reuqire("axios");
+const axios = require("axios");
 
 const logger = {};
 logger.log = function (error) {
