@@ -5,7 +5,7 @@ interface SignOutProps {}
 const SignOutPage: FunctionComponent<SignOutProps> = () => {
   return (
     <div>
-      sign out here<div>...</div>
+      Sign out here<div>...</div>
     </div>
   );
 };

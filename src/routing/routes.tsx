@@ -19,7 +19,7 @@ import PrivacyPolicy from "../components/pages/PrivacyPolicy";
 import Cookies from "../components/pages/Cookies";
 import SinglePost from "../components/pages/SinglePost";
 
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import EventLayout from "../components/layouts/EventLayout";
 import Support from "../components/pages/Support";
 import Venues from "../components/pages/Venues";

@@ -22,7 +22,7 @@ const DJUsersPage = () => {
               profile_picture,
               cover_photo,
             } = user;
-            
+
             const avatarURL = profile_picture?.includes("https://")
               ? profile_picture
               : "https://files.djfan.app/" + profile_picture;

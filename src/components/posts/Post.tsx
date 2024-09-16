@@ -10,7 +10,6 @@ import {
   Flex,
   HStack,
   Text,
-  VStack,
   Link,
   As,
   Menu,
@@ -25,7 +24,13 @@ import {
   AlertDialogOverlay,
   Center,
 } from "@chakra-ui/react";
-import { FunctionComponent, MouseEvent, useMemo, useRef, useState } from "react";
+import {
+  FunctionComponent,
+  MouseEvent,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Post as IPost, PostVariant, deletePost } from "../../hooks/usePosts";
 import { useProfile } from "../../hooks/useProfile";
@@ -33,7 +38,13 @@ import AudioContent from "./post-variants/AudioContent";
 import ImagesContent from "./post-variants/ImagesContent";
 import TextContent from "./post-variants/TextContent";
 import VideoContent from "./post-variants/VideoContent";
-import { FiHeadphones, FiDownload, FiEye, FiMoreVertical, FiShare } from "react-icons/fi";
+import {
+  FiHeadphones,
+  FiDownload,
+  FiEye,
+  FiMoreVertical,
+  FiShare,
+} from "react-icons/fi";
 import { FaCirclePause, FaCirclePlay } from "react-icons/fa6";
 import {
   BiSolidLock,
@@ -74,7 +85,11 @@ const accessLevelTest = function (accesslevel_id: number) {
   }
 };
 
-const PostMenu: FunctionComponent<PostMenuProps> = ({ icon, label, onClick }) => (
+const PostMenu: FunctionComponent<PostMenuProps> = ({
+  icon,
+  label,
+  onClick,
+}) => (
   <MenuItem py="10px" aria-label={label} onClick={onClick}>
     <Box as={icon} size="16px" mr="8px" />
     <Text>{label}</Text>
@@ -106,7 +121,13 @@ const handleDownloadPost = async (postId: number) => {
 
 const DJ_APP_POST_URL = import.meta.env.VITE_DJFAN_DJ_URL + "/create";
 
-const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLikePostIds, onDeletePostCallback, customFooter }) => {
+const Post: FunctionComponent<PostProps> = ({
+  post,
+  likePostIds,
+  handleChangeLikePostIds,
+  onDeletePostCallback,
+  customFooter,
+}) => {
   const { data: user } = useUser();
   const isUserLoggedIn = !!user?.user_id;
   const { username } = useParams<{ username: string }>();
@@ -140,17 +161,23 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
     if (res) {
       if (res.liked) {
         if (!isLiked) {
-          handleChangeLikePostIds && handleChangeLikePostIds([...(likePostIds || []), post.id]);
+          handleChangeLikePostIds &&
+            handleChangeLikePostIds([...(likePostIds || []), post.id]);
         }
       } else {
         if (isLiked) {
-          handleChangeLikePostIds && handleChangeLikePostIds((likePostIds || []).filter((likePost) => likePost !== post.id));
+          handleChangeLikePostIds &&
+            handleChangeLikePostIds(
+              (likePostIds || []).filter((likePost) => likePost !== post.id)
+            );
         }
       }
     }
   };
 
-  const share = function (params = { image: "", title: "", text: "", url: "" }) {
+  const share = function (
+    params = { image: "", title: "", text: "", url: "" }
+  ) {
     if (navigator.share) {
       let metaImage = document.querySelector('meta[property="og:image"]');
       if (metaImage == null) {
@@ -198,7 +225,9 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
 
   return (
     <>
-      {isModalOpen && <MembershipPrompt accesslevel={accesslevel} onClose={closeModal} />}
+      {isModalOpen && (
+        <MembershipPrompt accesslevel={accesslevel} onClose={closeModal} />
+      )}
 
       <Card border="2px solid black" borderRadius="15px" width="100%">
         <CardHeader borderBottom="2px solid black" zIndex="1">
@@ -209,11 +238,24 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
                 border="1px solid cyan"
                 src={post?.profile_picture || profile?.profile_picture}
               >
-                <AvatarBadge bg="green.500" boxSize="1.25rem" borderColor="white" display="block" justifyContent="flex-end" />
+                <AvatarBadge
+                  bg="green.500"
+                  boxSize="1.25rem"
+                  borderColor="white"
+                  display="block"
+                  justifyContent="flex-end"
+                />
               </Avatar>
               <Box>
-                <Link pb="2px" size="sm" fontWeight="700" as={RouterLink} to={`/artists/${post?.profile_url ?? profile?.profile_url}`}>
-                  {post?.display_name || (profile?.display_name && profile.display_name)}
+                <Link
+                  pb="2px"
+                  size="sm"
+                  fontWeight="700"
+                  as={RouterLink}
+                  to={`/artists/${post?.profile_url ?? profile?.profile_url}`}
+                >
+                  {post?.display_name ||
+                    (profile?.display_name && profile.display_name)}
                 </Link>
                 <HStack>
                   <Text fontSize="12px" color="gray.500" fontWeight="500">
@@ -226,7 +268,8 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
                   <Flex align="center" gap="4px">
                     <Box as={FiEye} size="14px" color="#805ad5" />
                     <Text fontSize="14px" color="#805ad5" fontWeight="600">
-                      {post?.accesslevel_id && accessLevelTest(post.accesslevel_id)}
+                      {post?.accesslevel_id &&
+                        accessLevelTest(post.accesslevel_id)}
                     </Text>
                   </Flex>
                 </HStack>
@@ -243,7 +286,14 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
                 >
                   <Box as={FiMoreVertical} size="20px" color="gray" />
                 </MenuButton>
-                <MenuList minW="max-content" fontSize="14px" bg="white" p="0" m="0" borderColor="gray.200">
+                <MenuList
+                  minW="max-content"
+                  fontSize="14px"
+                  bg="white"
+                  p="0"
+                  m="0"
+                  borderColor="gray.200"
+                >
                   <PostMenu
                     icon={BiEdit}
                     label="Edit Post"
@@ -452,10 +502,18 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
                 </Box>
               )}
               {post?.audio[0].embedded == false && (
-                <AudioContent audios={post.audio} hasaccess={post.has_access} accesslevel={post.accesslevel_id} />
+                <AudioContent
+                  audios={post.audio}
+                  hasaccess={post.has_access}
+                  accesslevel={post.accesslevel_id}
+                />
               )}
               {post.has_access == true && post?.audio[0].embedded == true && (
-                <AudioContent audios={post.audio} hasaccess={post.has_access} accesslevel={post.accesslevel_id} />
+                <AudioContent
+                  audios={post.audio}
+                  hasaccess={post.has_access}
+                  accesslevel={post.accesslevel_id}
+                />
               )}
               {post.has_access == false && post?.audio[0].embedded == true && (
                 <Box
@@ -480,7 +538,9 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
           )}
           {post.posttype_id === PostVariant.Video && (
             <>
-              {(post.has_access === true || post?.page == "home") && <VideoContent videos={post.video} />}
+              {(post.has_access === true || post?.page == "home") && (
+                <VideoContent videos={post.video} />
+              )}
 
               {post.has_access === false && post?.page != "home" && (
                 <Box style={{ position: "relative" }}>
@@ -539,9 +599,22 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
                   }}
                 >
                   <Center style={{ height: "100%", width: "100%" }}>
-                    <Box position={"relative"} style={{ minHeight: "200px", maxHeight: "500px" }}>
-                      <Box position={"absolute"} top="50%" left="50%" transform="translate(-50%, -50%)">
-                        <Box borderRadius="100px" bg="#fff" zIndex={"1"} top="30px">
+                    <Box
+                      position={"relative"}
+                      style={{ minHeight: "200px", maxHeight: "500px" }}
+                    >
+                      <Box
+                        position={"absolute"}
+                        top="50%"
+                        left="50%"
+                        transform="translate(-50%, -50%)"
+                      >
+                        <Box
+                          borderRadius="100px"
+                          bg="#fff"
+                          zIndex={"1"}
+                          top="30px"
+                        >
                           <FaCirclePlay
                             {...iconStyles}
                             onClick={() => {
@@ -594,7 +667,12 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
               justify-content="space-between"
               px="0"
               py="5px"
-              borderTop={`${post.has_access === true && isUserLoggedIn && post?.page != "home" && "2px solid #000"}`}
+              borderTop={`${
+                post.has_access === true &&
+                isUserLoggedIn &&
+                post?.page != "home" &&
+                "2px solid #000"
+              }`}
               alignItems="center"
             >
               {/*
@@ -638,20 +716,29 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
                 }}
               >
                 <div style={{ padding: "4px", cursor: "pointer" }}>
-                  {post.has_access === true && isUserLoggedIn && post?.page != "home" && (
-                    <>
-                      {isLiked ? (
-                        <AiFillHeart color="#DC143C" size={25} onClick={handleClick} />
-                      ) : (
-                        <AiOutlineHeart size={25} onClick={handleClick} />
-                      )}
-                    </>
-                  )}
+                  {post.has_access === true &&
+                    isUserLoggedIn &&
+                    post?.page != "home" && (
+                      <>
+                        {isLiked ? (
+                          <AiFillHeart
+                            color="#DC143C"
+                            size={25}
+                            onClick={handleClick}
+                          />
+                        ) : (
+                          <AiOutlineHeart size={25} onClick={handleClick} />
+                        )}
+                      </>
+                    )}
                 </div>
 
                 {post.posttype_id === PostVariant.Audio && post.has_access && (
                   <div style={{ padding: "4px", cursor: "pointer" }}>
-                    <FiDownload size={26} onClick={() => handleDownloadPost(post.id)} />
+                    <FiDownload
+                      size={26}
+                      onClick={() => handleDownloadPost(post.id)}
+                    />
                   </div>
                 )}
 
@@ -661,14 +748,20 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
                       size={26}
                       onClick={() => {
                         share({
-                          image: `${post?.profile_picture || profile?.profile_picture}`,
+                          image: `${
+                            post?.profile_picture || profile?.profile_picture
+                          }`,
                           title: `${
-                            post?.display_name || (profile?.display_name && profile.display_name)
+                            post?.display_name ||
+                            (profile?.display_name && profile.display_name)
                           }  | Discover exclusive DJ content only on DJfan`,
                           text: `Discover more of ${
-                            post?.display_name || (profile?.display_name && profile.display_name)
+                            post?.display_name ||
+                            (profile?.display_name && profile.display_name)
                           }. Access tracks, playlists, videos, & exclusive releases. Members also get VIP invites, pre-release tickets, discounts, community chat & more.`,
-                          url: `https://djfan.app/artists/${post?.profile_url ?? profile?.profile_url}`,
+                          url: `https://djfan.app/artists/${
+                            post?.profile_url ?? profile?.profile_url
+                          }`,
                         });
                       }}
                     />
@@ -678,7 +771,11 @@ const Post: FunctionComponent<PostProps> = ({ post, likePostIds, handleChangeLik
             </CardFooter>
           ))}
 
-        <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
+        <AlertDialog
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+        >
           <AlertDialogOverlay>
             <AlertDialogContent>
               <AlertDialogHeader fontSize="lg" fontWeight="bold">
