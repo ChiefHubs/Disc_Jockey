@@ -4,12 +4,13 @@ const events = require("./app/api/events");
 const scanner = require("./app/api/scanner");
 const cors = require("cors");
 const user = require("./app/api/user");
-const products = require("./app/api/products");
-const search = require("./app/api/search");
 const rateLimit = require("express-rate-limit");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const logger = require("./app/logger");
+const products = require("./app/api/products");
+const search = require("./app/api/search");
+const loggerApi = require("./app/api/loggerApi");
 const session = require("express-session");
 const venuesRoute = require("./app/routes/venues");
 const supportRoute = require("./app/routes/support");
@@ -98,7 +99,6 @@ app.options(
     ],
   })
 );
-logger.checkRegion();
 // check if json
 app.use(function (err, req, res, next) {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {

