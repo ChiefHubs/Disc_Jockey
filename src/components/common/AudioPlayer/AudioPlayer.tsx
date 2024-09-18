@@ -17,25 +17,11 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
 } from "@chakra-ui/react";
 import { useRef, useState, useEffect, useMemo } from "react";
 import { VscMute, VscUnmute } from "react-icons/vsc";
 import { Duration } from "./Duration";
-import {
-  FiBookmark,
-  FiDownload,
-  FiEye,
-  FiInfo,
-  FiMoreHorizontal,
-  FiShare,
-  FiShoppingCart,
-  FiLock,
-  FiX,
-} from "react-icons/fi";
+import { FiEye, FiLock, FiX } from "react-icons/fi";
 import { FaCirclePause, FaCirclePlay } from "react-icons/fa6";
 import MembershipPrompt from "../profile/MembershipPrompt";
 
@@ -160,37 +146,7 @@ export const AudioPlayer = ({
           top="0"
           gap={{ base: "10px", sm: "0px" }}
         >
-          <Box p="10px" cursor={"pointer"} color="#fff" fontSize={"22px"}>
-            {/* <FiShoppingCart /> */}
-          </Box>
-          {/* 
-          <Menu>
-            <MenuButton p="10px" as={Box} cursor={"pointer"}>
-              <FiMoreHorizontal fontSize={"28px"} color="#fff" />
-            </MenuButton>
-            <MenuList
-              zIndex={"10"}
-              minW="unset"
-              width={"140px"}
-              fontSize={"14px"}
-            >
-              <MenuItem gap="5px">
-                <FiShare /> Share
-              </MenuItem>
-              <MenuItem gap="5px">
-                <FiBookmark /> Save
-              </MenuItem>
-              <MenuItem gap="5px">
-                <FiDownload />
-                Download
-              </MenuItem>
-              <MenuItem gap="5px">
-                <FiInfo />
-                Track Info
-              </MenuItem>
-            </MenuList>
-          </Menu>
-          */}
+          <Box p="10px" cursor={"pointer"} color="#fff" fontSize={"22px"}></Box>
         </HStack>
         <Flex
           w={{ base: "100%", sm: "30%" }}
@@ -301,24 +257,6 @@ export const AudioPlayer = ({
           </Flex>
         </Flex>
         <VStack w={{ base: "100%", sm: "65%" }}>
-          {/* 
-          <Text
-            lineHeight={"1em"}
-            fontSize={"14px"}
-            fontWeight="700"
-            color="#fff"
-            px="8px"
-            py={"7px"}
-            borderRadius={"10px"}
-            bg="#111"
-            display="flex"
-            alignItems="center"
-            gap="5px"
-          >
-            <FiUnlock />
-            30-SECOND PREVIEW
-          </Text>
-          */}
           <Text
             lineHeight={"1em"}
             fontSize={"20px"}

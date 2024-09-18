@@ -127,37 +127,6 @@ const useEventsForCalendar = (query: EventCalendarQuery, queryKey: any[]) => {
   });
 };
 
-// const useEventsForCalendar = (
-//   query: EventCalendarQuery,
-//   dependencies: any[]
-// ) => {
-
-//   const fetchEvents = (pageParam: number) => {
-//     return apiClient
-//       .get<EventFetch>("/events/calendar", {
-//         params: {
-//           _country_code: query._country_code,
-//           _startdate: query._startdate,
-//           _enddate: query._enddate,
-//         },
-//       })
-//       .then((res) => {
-//         return res.data.result;
-//       });
-//   };
-
-//   return useInfiniteQuery<ProfileEvent[], Error>({
-//     queryKey: ["events", "calendar", ...dependencies],
-//     queryFn: ({ pageParam = 1 }) => fetchEvents(pageParam),
-//     keepPreviousData: true,
-//     getNextPageParam: (lastPage, allPages) => {
-//       return lastPage.length > 0 && lastPage.length === query.pageSize
-//         ? allPages.length + 1
-//         : undefined;
-//     },
-//   });
-// };
-
 const useEventsForSearch = (query: EventQueryForSearch) => {
   const fetchEvents = () => {
     return apiClient

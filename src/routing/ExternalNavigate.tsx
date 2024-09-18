@@ -6,8 +6,6 @@ interface ExternalNavigateProps {
 }
 
 const ExternalNavigate: FunctionComponent<ExternalNavigateProps> = ({ to }) => {
-  // window.location.replace(to);
-  // console.log(to);
   to;
   return <AuthLayout />;
 };
