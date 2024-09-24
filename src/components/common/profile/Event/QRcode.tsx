@@ -1,4 +1,14 @@
-import { Box, Flex, Button, Modal, ModalOverlay, ModalContent, ModalBody, useDisclosure, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  useDisclosure,
+  Link,
+} from "@chakra-ui/react";
 import { FaBarcode } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
 import QRCode from "qrcode.react";
@@ -11,20 +21,14 @@ type AppProps = {
 export default function QRcode(props: AppProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const downloadQRCode = async function () {
-    const canvas: HTMLCanvasElement = document.querySelector("canvas") || document.createElement("canvas");
+    const canvas: HTMLCanvasElement =
+      document.querySelector("canvas") || document.createElement("canvas");
     const dataUrl = canvas.toDataURL("image/png", 1);
     const downloadLink = document.createElement("a");
     downloadLink.download = "qrcode.png";
     downloadLink.href = dataUrl;
     downloadLink.click();
   };
-
-  // const walletApple = async function () {};
-  // const walletGoogle = async function () {};
-  // Apple Wallet link (use the URL to your .pkpass file)
-  // document.getElementById('apple-wallet-link').href = 'https://your-server.com/path/to/your/pass.pkpass';
-  // Google Wallet link (typically a URL to add the pass to Google Wallet)
-  // document.getElementById('google-wallet-link').href = 'https://pay.google.com/gp/v/save/&lt;JWT_TOKEN&gt;';
 
   return (
     <>
@@ -64,7 +68,12 @@ export default function QRcode(props: AppProps) {
             <GrClose />
           </Box>
           <ModalBody>
-            <Flex flexDirection="column" py="15px" alignItems="center" gap="20px">
+            <Flex
+              flexDirection="column"
+              py="15px"
+              alignItems="center"
+              gap="20px"
+            >
               <Box
                 paddingTop={10}
                 style={{
@@ -87,7 +96,12 @@ export default function QRcode(props: AppProps) {
               <Link onClick={walletApple}>Add to Apple Wallet </Link>
               <Link onClick={walletGoogle}>Add to Google Wallet </Link>
               */}
-              <Button as="a" onClick={downloadQRCode} colorScheme="purple" style={{ textDecoration: "none", cursor: "pointer" }}>
+              <Button
+                as="a"
+                onClick={downloadQRCode}
+                colorScheme="purple"
+                style={{ textDecoration: "none", cursor: "pointer" }}
+              >
                 Save QR code
               </Button>
             </Flex>

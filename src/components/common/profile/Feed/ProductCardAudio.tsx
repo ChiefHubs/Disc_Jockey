@@ -7,29 +7,9 @@ import {
   Heading,
   Button,
   Image,
-  // Text,
-  // MenuItem,
-  // Menu,
-  // MenuButton,
-  // MenuList,
 } from "@chakra-ui/react";
 import { IProduct, useProfile } from "../../../../hooks/useProfile";
 import { useNavigate, useParams } from "react-router-dom";
-/* import { BiLike, BiTrash } from "react-icons/bi";
-  import { FiShare, FiMoreVertical } from "react-icons/fi";
-  
-  type PostMenuProps = {
-    icon: React.ElementType;
-    label: string;
-  };
-  
-  const PostMenu = ({ icon, label }: PostMenuProps) => (
-    <MenuItem py="10px" aria-label={label}>
-      <Box as={icon} size="14px" mr="8px" />
-      <Text>{label}</Text>
-    </MenuItem>
-  ); */
-
 type ProductCardProps = {
   product: IProduct;
   profilePicture?: string;
@@ -66,32 +46,6 @@ export default function ProductCardAudio({
           fallbackSrc={profilePicture}
           alt="product image"
         />
-        {/* <Flex
-            justify="flex-end"
-            px="5px"
-            pt="10px"
-            position="absolute"
-            right="5px"
-            top="0px"
-          >
-            <Menu>
-              <MenuButton transition="all 0.3s" _focus={{ boxShadow: "none" }}>
-                <Box as={FiMoreVertical} size="20px" color="lightgray" />
-              </MenuButton>
-              <MenuList
-                minW="max-content"
-                fontSize="14px"
-                bg="white"
-                p="0"
-                m="0"
-                borderColor="gray.200"
-              >
-                <PostMenu icon={BiLike} label="Edit Product" />
-                <PostMenu icon={BiTrash} label="Delete Product" />
-                <PostMenu icon={FiShare} label="Share Product" />
-              </MenuList>
-            </Menu>
-          </Flex> */}
       </CardHeader>
       <CardBody pt="5px">
         <Flex mt="-15px" align="center" direction="column">

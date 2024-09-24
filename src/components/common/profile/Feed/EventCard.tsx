@@ -1,6 +1,4 @@
 import {
-  Avatar,
-  AvatarProps,
   Flex,
   Box,
   Card,
@@ -10,16 +8,7 @@ import {
   Heading,
   Button,
   Image,
-  Stack,
-  Spacer,
-  Link,
   useToast,
-  Center,
-  SimpleGrid,
-  VStack,
-  HStack,
-  Show,
-  Hide,
 } from "@chakra-ui/react";
 import { GuestList, ProfileEvent } from "../../../../hooks/useEvents";
 import { BiRightArrowCircle } from "react-icons/bi";
@@ -80,7 +69,13 @@ const share = function (params = { image: "", title: "", text: "", url: "" }) {
   return false;
 };
 
-export default function EventCard({ event, userEvents = [], isUserLoggedIn = false, singlePage = false, guestListData }: EventCardProps) {
+export default function EventCard({
+  event,
+  userEvents = [],
+  isUserLoggedIn = false,
+  singlePage = false,
+  guestListData,
+}: EventCardProps) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const toast = useToast();
@@ -129,17 +124,51 @@ export default function EventCard({ event, userEvents = [], isUserLoggedIn = fal
     }
   };
 
-  let daysFromStart = event.guest_invite_start ? dayjs().diff(dayjs(event.guest_invite_start), "day") : -1;
-  let daysTillEnd = event.guest_invite_start ? dayjs(event.guest_invite_end).diff(dayjs(), "day") : -1;
-  let hoursTillEnd = event.guest_invite_start ? dayjs(event.guest_invite_end).diff(dayjs(), "hour") : -1;
+  let daysFromStart = event.guest_invite_start
+    ? dayjs().diff(dayjs(event.guest_invite_start), "day")
+    : -1;
+  let daysTillEnd = event.guest_invite_start
+    ? dayjs(event.guest_invite_end).diff(dayjs(), "day")
+    : -1;
+  let hoursTillEnd = event.guest_invite_start
+    ? dayjs(event.guest_invite_end).diff(dayjs(), "hour")
+    : -1;
 
   return (
     <>
-      {isUserLoggedIn && <>{isModalOpen && <MembershipPrompt accesslevel={2} onClose={closeModal} urlLocation={window.location.href} />}</>}
+      {isUserLoggedIn && (
+        <>
+          {isModalOpen && (
+            <MembershipPrompt
+              accesslevel={2}
+              onClose={closeModal}
+              urlLocation={window.location.href}
+            />
+          )}
+        </>
+      )}
 
-      {!isUserLoggedIn && <> {isModalOpen && <MembershipPromptNew onClose={closeModal} subscriptionDetails={subscriptionDetails} />}</>}
+      {!isUserLoggedIn && (
+        <>
+          {" "}
+          {isModalOpen && (
+            <MembershipPromptNew
+              onClose={closeModal}
+              subscriptionDetails={subscriptionDetails}
+            />
+          )}
+        </>
+      )}
 
-      <Flex w={{ base: "100%", md: "500px" }} maxW="100%" flexDirection="column" justifyContent="center" align="center" m="auto" p="0px">
+      <Flex
+        w={{ base: "100%", md: "500px" }}
+        maxW="100%"
+        flexDirection="column"
+        justifyContent="center"
+        align="center"
+        m="auto"
+        p="0px"
+      >
         <Card border="2px solid black" borderRadius="15px" overflow="hidden">
           <CardHeader p="0" bg="black">
             <Image
@@ -152,7 +181,11 @@ export default function EventCard({ event, userEvents = [], isUserLoggedIn = fal
               style={{ cursor: !singlePage ? "pointer" : "" }}
               onClick={() => {
                 if (!singlePage) {
-                  navigate(`${pathname}/event/${event?.url != "" ? event.url : event.id}`);
+                  navigate(
+                    `${pathname}/event/${
+                      event?.url != "" ? event.url : event.id
+                    }`
+                  );
                 }
               }}
             />
@@ -165,7 +198,10 @@ export default function EventCard({ event, userEvents = [], isUserLoggedIn = fal
               justifyContent="space-between"
             >
               <Text color="black" fontWeight="600">
-                {dayjs(event.event_date).format("dddd D MMMM")} , {event?.venue_id > 0 ? event.venue_name : event.venue + " " + event.city}
+                {dayjs(event.event_date).format("dddd D MMMM")} ,{" "}
+                {event?.venue_id > 0
+                  ? event.venue_name
+                  : event.venue + " " + event.city}
               </Text>
 
               <Text color="black" fontWeight="600">
@@ -208,7 +244,10 @@ export default function EventCard({ event, userEvents = [], isUserLoggedIn = fal
                     if (dj.url == "") {
                       return (
                         <span key={index}>
-                          <Text as="span" style={{ padding: "6px", whiteSpace: "nowrap" }}>
+                          <Text
+                            as="span"
+                            style={{ padding: "6px", whiteSpace: "nowrap" }}
+                          >
                             {dj.dj}
                           </Text>
                           {index < lineUpList.length - 1 ? ", " : ""}
@@ -219,7 +258,12 @@ export default function EventCard({ event, userEvents = [], isUserLoggedIn = fal
                         <span key={index}>
                           <Text
                             as="span"
-                            style={{ fontWeight: "600", fontSize: "18px", whiteSpace: "nowrap", cursor: "pointer" }}
+                            style={{
+                              fontWeight: "600",
+                              fontSize: "18px",
+                              whiteSpace: "nowrap",
+                              cursor: "pointer",
+                            }}
                             onClick={() => {
                               navigate(`/artists/${dj.url}`);
                             }}
@@ -249,235 +293,320 @@ export default function EventCard({ event, userEvents = [], isUserLoggedIn = fal
               <>
                 {!isUserLoggedIn && (
                   <>
-                    {event?.guest_invite_number > 0 && daysFromStart >= 0 && daysTillEnd >= 0 && event.guestlist_available > 0 && (
-                      <Flex
-                        bg="#E6E6FA"
-                        color="black"
-                        borderTop="solid 2px transparent"
-                        borderBottom="solid 2px transparent"
-                        justifyContent="center"
-                        w="100%"
-                        minHeight="100px"
-                        display="inline-grid"
-                        style={{
-                          cursor: "pointer",
-                          borderTop: "2px #000 solid",
-                          paddingTop: "16px",
-                          paddingBottom: "8px",
-                          textAlign: "center",
-                        }}
-                      >
-                        <Box style={{ fontSize: "18px", fontWeight: "400" }}>Secure your spot on the guestlist,</Box>
-                        <Box style={{ fontSize: "18px", fontWeight: "400" }}>acquire Gold membership now.</Box>
-                        <Flex justifyContent="center" w="100%">
-                          <Box p="12px">
-                            <button
-                              className="gradient-button"
-                              style={{
-                                fontWeight: "600",
-                                fontSize: "1.1em",
-                                height: "42px",
-                                lineHeight: "1.1em",
-                                border: "1px solid #5c03bc",
-                              }}
-                              onClick={() => {
-                                setIsModalOpen(true);
-                                /* handleClickPurchaseWithoutRegistration(event.id.toString()); */
-                              }}
-                            >
-                              {daysTillEnd > 2 && (
-                                <>
-                                  {" "}
-                                  {daysTillEnd} day{daysTillEnd > 1 ? "s" : ""} left,
-                                </>
-                              )}
-                              {daysTillEnd <= 2 && (
-                                <>
-                                  {" "}
-                                  {hoursTillEnd} hour{hoursTillEnd > 1 ? "s" : ""} left,
-                                </>
-                              )}{" "}
-                              click here!
-                            </button>
-                            <Box style={{ fontSize: "18px", fontWeight: "400", paddingTop: "6px" }}>
-                              Still {event.guestlist_available}{" "}
-                              <Text as="span" style={{ fontWeight: "600" }}>
-                                {event.guestlist_available > 1 ? " passes " : " pass "}
-                              </Text>{" "}
-                              available
-                            </Box>
+                    {event?.guest_invite_number > 0 &&
+                      daysFromStart >= 0 &&
+                      daysTillEnd >= 0 &&
+                      event.guestlist_available > 0 && (
+                        <Flex
+                          bg="#E6E6FA"
+                          color="black"
+                          borderTop="solid 2px transparent"
+                          borderBottom="solid 2px transparent"
+                          justifyContent="center"
+                          w="100%"
+                          minHeight="100px"
+                          display="inline-grid"
+                          style={{
+                            cursor: "pointer",
+                            borderTop: "2px #000 solid",
+                            paddingTop: "16px",
+                            paddingBottom: "8px",
+                            textAlign: "center",
+                          }}
+                        >
+                          <Box style={{ fontSize: "18px", fontWeight: "400" }}>
+                            Secure your spot on the guestlist,
                           </Box>
+                          <Box style={{ fontSize: "18px", fontWeight: "400" }}>
+                            acquire Gold membership now.
+                          </Box>
+                          <Flex justifyContent="center" w="100%">
+                            <Box p="12px">
+                              <button
+                                className="gradient-button"
+                                style={{
+                                  fontWeight: "600",
+                                  fontSize: "1.1em",
+                                  height: "42px",
+                                  lineHeight: "1.1em",
+                                  border: "1px solid #5c03bc",
+                                }}
+                                onClick={() => {
+                                  setIsModalOpen(true);
+                                  /* handleClickPurchaseWithoutRegistration(event.id.toString()); */
+                                }}
+                              >
+                                {daysTillEnd > 2 && (
+                                  <>
+                                    {" "}
+                                    {daysTillEnd} day
+                                    {daysTillEnd > 1 ? "s" : ""} left,
+                                  </>
+                                )}
+                                {daysTillEnd <= 2 && (
+                                  <>
+                                    {" "}
+                                    {hoursTillEnd} hour
+                                    {hoursTillEnd > 1 ? "s" : ""} left,
+                                  </>
+                                )}{" "}
+                                click here!
+                              </button>
+                              <Box
+                                style={{
+                                  fontSize: "18px",
+                                  fontWeight: "400",
+                                  paddingTop: "6px",
+                                }}
+                              >
+                                Still {event.guestlist_available}{" "}
+                                <Text as="span" style={{ fontWeight: "600" }}>
+                                  {event.guestlist_available > 1
+                                    ? " passes "
+                                    : " pass "}
+                                </Text>{" "}
+                                available
+                              </Box>
+                            </Box>
+                          </Flex>
                         </Flex>
-                      </Flex>
-                    )}
+                      )}
                   </>
                 )}
 
                 {isUserLoggedIn && (
                   <>
-                    {event?.guest_invite_number > 0 && daysFromStart >= 0 && daysTillEnd >= 0 && (
-                      <>
-                        {userEventStatus == null && !guestListData?.status && event.guestlist_available > 0 && (
-                          <Box w="100%" justifyContent="center">
-                            <Flex
-                              bg="#E6E6FA"
-                              color="black"
-                              borderTop="solid 2px transparent"
-                              borderBottom="solid 2px transparent"
-                              justifyContent="center"
-                              w="100%"
-                              minHeight="100px"
-                              display="inline-grid"
-                              style={{
-                                cursor: "pointer",
-                                borderTop: "2px #000 solid",
-                                paddingTop: "16px",
-                                paddingBottom: "8px",
-                                textAlign: "center",
-                              }}
-                            >
-                              <Box style={{ fontSize: "18px", fontWeight: "400" }}>Secure your spot on the guestlist,</Box>
-                              <Box style={{ fontSize: "18px", fontWeight: "400" }}>acquire Gold membership now.</Box>
-                              <Flex justifyContent="center" w="100%">
-                                <Box p="12px">
-                                  <button
-                                    className="gradient-button"
+                    {event?.guest_invite_number > 0 &&
+                      daysFromStart >= 0 &&
+                      daysTillEnd >= 0 && (
+                        <>
+                          {userEventStatus == null &&
+                            !guestListData?.status &&
+                            event.guestlist_available > 0 && (
+                              <Box w="100%" justifyContent="center">
+                                <Flex
+                                  bg="#E6E6FA"
+                                  color="black"
+                                  borderTop="solid 2px transparent"
+                                  borderBottom="solid 2px transparent"
+                                  justifyContent="center"
+                                  w="100%"
+                                  minHeight="100px"
+                                  display="inline-grid"
+                                  style={{
+                                    cursor: "pointer",
+                                    borderTop: "2px #000 solid",
+                                    paddingTop: "16px",
+                                    paddingBottom: "8px",
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  <Box
                                     style={{
-                                      fontWeight: "600",
-                                      fontSize: "1.1em",
-                                      height: "42px",
-                                      lineHeight: "1.1em",
-                                      border: "1px solid #5c03bc",
-                                    }}
-                                    onClick={() => {
-                                      setIsModalOpen(true);
+                                      fontSize: "18px",
+                                      fontWeight: "400",
                                     }}
                                   >
-                                    {daysTillEnd > 2 && (
-                                      <>
-                                        {" "}
-                                        {daysTillEnd} day{daysTillEnd > 1 ? "s" : ""} left,
-                                      </>
-                                    )}
-                                    {daysTillEnd <= 2 && (
-                                      <>
-                                        {" "}
-                                        {hoursTillEnd} hour{hoursTillEnd > 1 ? "s" : ""} left,
-                                      </>
-                                    )}{" "}
-                                    click here!
-                                  </button>
-                                  <Box style={{ fontSize: "18px", fontWeight: "400", paddingTop: "6px" }}>
-                                    Still {event.guestlist_available} {event.guestlist_available > 1 ? " passes " : " pass "} available
+                                    Secure your spot on the guestlist,
                                   </Box>
-                                </Box>
-                              </Flex>
-                            </Flex>
-                          </Box>
-                        )}
-                        {userEventStatus != null && event.guestlist_available > 0 && (
-                          <Flex
-                            bg="purple"
-                            color="white"
-                            borderTop="solid 2px transparent"
-                            borderBottom="solid 2px transparent"
-                            justifyContent="center"
-                            w="100%"
-                          >
-                            <Box w="100%" justifyContent="center">
-                              {userEventStatus >= 0 && userEventStatus <= 3 && (
-                                <Box w="100%" justifyContent="center">
-                                  <Flex
-                                    bg="#E6E6FA"
-                                    color="black"
-                                    borderTop="solid 2px transparent"
-                                    borderBottom="solid 2px transparent"
-                                    justifyContent="center"
-                                    w="100%"
-                                    minHeight="100px"
-                                    display="inline-grid"
+                                  <Box
                                     style={{
-                                      borderTop: "2px #000 solid",
-                                      paddingTop: "16px",
-                                      paddingBottom: "8px",
-                                      textAlign: "center",
+                                      fontSize: "18px",
+                                      fontWeight: "400",
                                     }}
                                   >
-                                    <Box style={{ fontSize: "18px", fontWeight: "400" }}>Get on the guestlist!</Box>
-                                    <Button
-                                      rightIcon={<BiRightArrowCircle size="22px" />}
-                                      fontSize="16px"
-                                      flex="1"
-                                      variant="solid"
-                                      colorScheme="purple"
-                                      onClick={() => {
-                                        navigate(`${pathname}/event/${event?.url != "" ? event.url : event.id}`);
-                                      }}
-                                    >
-                                      {daysTillEnd > 2 && (
-                                        <>
-                                          {" "}
-                                          Only {daysTillEnd} day{daysTillEnd > 1 ? "s" : ""} left.
-                                        </>
-                                      )}
-                                      {daysTillEnd <= 2 && (
-                                        <>
-                                          {" "}
-                                          Only {hoursTillEnd} hour{hoursTillEnd > 1 ? "s" : ""} left.
-                                        </>
-                                      )}
-                                    </Button>
-                                  </Flex>
-                                </Box>
-                              )}
-
-                              {userEventStatus == 4 && (
-                                <Box w="100%" justifyContent="center">
-                                  <Flex
-                                    bg="#E6E6FA"
-                                    color="black"
-                                    borderTop="solid 2px transparent"
-                                    borderBottom="solid 2px transparent"
-                                    justifyContent="center"
-                                    w="100%"
-                                    minHeight="100px"
-                                    display="inline-grid"
-                                    style={{
-                                      cursor: "pointer",
-                                      borderTop: "2px #000 solid",
-                                      paddingTop: "16px",
-                                      paddingBottom: "8px",
-                                      textAlign: "center",
-                                    }}
-                                    onClick={() => {
-                                      navigate(`${pathname}/event/${event?.url != "" ? event.url : event.id}`);
-                                    }}
-                                  >
-                                    <Box style={{ fontSize: "18px", fontWeight: "400" }}>
-                                      You are signed up for the guest list. <br />
-                                      Your guestlist pass becomes available in
-                                      {daysTillEnd > 2 && (
-                                        <>
-                                          {" "}
-                                          {daysTillEnd} day{daysTillEnd > 1 ? "s" : ""}.<br />
-                                        </>
-                                      )}
-                                      {daysTillEnd <= 2 && (
-                                        <>
-                                          {" "}
-                                          {hoursTillEnd + 1} hour{hoursTillEnd + 1 > 1 ? "s" : ""}.<br />
-                                        </>
-                                      )}
-                                      We inform you by email when ready.{" "}
+                                    acquire Gold membership now.
+                                  </Box>
+                                  <Flex justifyContent="center" w="100%">
+                                    <Box p="12px">
+                                      <button
+                                        className="gradient-button"
+                                        style={{
+                                          fontWeight: "600",
+                                          fontSize: "1.1em",
+                                          height: "42px",
+                                          lineHeight: "1.1em",
+                                          border: "1px solid #5c03bc",
+                                        }}
+                                        onClick={() => {
+                                          setIsModalOpen(true);
+                                        }}
+                                      >
+                                        {daysTillEnd > 2 && (
+                                          <>
+                                            {" "}
+                                            {daysTillEnd} day
+                                            {daysTillEnd > 1 ? "s" : ""} left,
+                                          </>
+                                        )}
+                                        {daysTillEnd <= 2 && (
+                                          <>
+                                            {" "}
+                                            {hoursTillEnd} hour
+                                            {hoursTillEnd > 1 ? "s" : ""} left,
+                                          </>
+                                        )}{" "}
+                                        click here!
+                                      </button>
+                                      <Box
+                                        style={{
+                                          fontSize: "18px",
+                                          fontWeight: "400",
+                                          paddingTop: "6px",
+                                        }}
+                                      >
+                                        Still {event.guestlist_available}{" "}
+                                        {event.guestlist_available > 1
+                                          ? " passes "
+                                          : " pass "}{" "}
+                                        available
+                                      </Box>
                                     </Box>
                                   </Flex>
+                                </Flex>
+                              </Box>
+                            )}
+                          {userEventStatus != null &&
+                            event.guestlist_available > 0 && (
+                              <Flex
+                                bg="purple"
+                                color="white"
+                                borderTop="solid 2px transparent"
+                                borderBottom="solid 2px transparent"
+                                justifyContent="center"
+                                w="100%"
+                              >
+                                <Box w="100%" justifyContent="center">
+                                  {userEventStatus >= 0 &&
+                                    userEventStatus <= 3 && (
+                                      <Box w="100%" justifyContent="center">
+                                        <Flex
+                                          bg="#E6E6FA"
+                                          color="black"
+                                          borderTop="solid 2px transparent"
+                                          borderBottom="solid 2px transparent"
+                                          justifyContent="center"
+                                          w="100%"
+                                          minHeight="100px"
+                                          display="inline-grid"
+                                          style={{
+                                            borderTop: "2px #000 solid",
+                                            paddingTop: "16px",
+                                            paddingBottom: "8px",
+                                            textAlign: "center",
+                                          }}
+                                        >
+                                          <Box
+                                            style={{
+                                              fontSize: "18px",
+                                              fontWeight: "400",
+                                            }}
+                                          >
+                                            Get on the guestlist!
+                                          </Box>
+                                          <Button
+                                            rightIcon={
+                                              <BiRightArrowCircle size="22px" />
+                                            }
+                                            fontSize="16px"
+                                            flex="1"
+                                            variant="solid"
+                                            colorScheme="purple"
+                                            onClick={() => {
+                                              navigate(
+                                                `${pathname}/event/${
+                                                  event?.url != ""
+                                                    ? event.url
+                                                    : event.id
+                                                }`
+                                              );
+                                            }}
+                                          >
+                                            {daysTillEnd > 2 && (
+                                              <>
+                                                {" "}
+                                                Only {daysTillEnd} day
+                                                {daysTillEnd > 1 ? "s" : ""}{" "}
+                                                left.
+                                              </>
+                                            )}
+                                            {daysTillEnd <= 2 && (
+                                              <>
+                                                {" "}
+                                                Only {hoursTillEnd} hour
+                                                {hoursTillEnd > 1 ? "s" : ""}{" "}
+                                                left.
+                                              </>
+                                            )}
+                                          </Button>
+                                        </Flex>
+                                      </Box>
+                                    )}
+
+                                  {userEventStatus == 4 && (
+                                    <Box w="100%" justifyContent="center">
+                                      <Flex
+                                        bg="#E6E6FA"
+                                        color="black"
+                                        borderTop="solid 2px transparent"
+                                        borderBottom="solid 2px transparent"
+                                        justifyContent="center"
+                                        w="100%"
+                                        minHeight="100px"
+                                        display="inline-grid"
+                                        style={{
+                                          cursor: "pointer",
+                                          borderTop: "2px #000 solid",
+                                          paddingTop: "16px",
+                                          paddingBottom: "8px",
+                                          textAlign: "center",
+                                        }}
+                                        onClick={() => {
+                                          navigate(
+                                            `${pathname}/event/${
+                                              event?.url != ""
+                                                ? event.url
+                                                : event.id
+                                            }`
+                                          );
+                                        }}
+                                      >
+                                        <Box
+                                          style={{
+                                            fontSize: "18px",
+                                            fontWeight: "400",
+                                          }}
+                                        >
+                                          You are signed up for the guest list.{" "}
+                                          <br />
+                                          Your guestlist pass becomes available
+                                          in
+                                          {daysTillEnd > 2 && (
+                                            <>
+                                              {" "}
+                                              {daysTillEnd} day
+                                              {daysTillEnd > 1 ? "s" : ""}.
+                                              <br />
+                                            </>
+                                          )}
+                                          {daysTillEnd <= 2 && (
+                                            <>
+                                              {" "}
+                                              {hoursTillEnd + 1} hour
+                                              {hoursTillEnd + 1 > 1 ? "s" : ""}.
+                                              <br />
+                                            </>
+                                          )}
+                                          We inform you by email when ready.{" "}
+                                        </Box>
+                                      </Flex>
+                                    </Box>
+                                  )}
                                 </Box>
-                              )}
-                            </Box>
-                          </Flex>
-                        )}
-                      </>
-                    )}
+                              </Flex>
+                            )}
+                        </>
+                      )}
                   </>
                 )}
               </>
@@ -509,13 +638,24 @@ export default function EventCard({ event, userEvents = [], isUserLoggedIn = fal
             )}
 
             <Box style={{ paddingTop: "25px" }}>
-              <Box>{event.venue_logo && <Image boxSize="80px" objectFit="cover" src={event.venue_logo} alt="Venue logo" />}</Box>
+              <Box>
+                {event.venue_logo && (
+                  <Image
+                    boxSize="80px"
+                    objectFit="cover"
+                    src={event.venue_logo}
+                    alt="Venue logo"
+                  />
+                )}
+              </Box>
               <Box>
                 <Text ml="5px" color="white">
                   <Box as="span" fontWeight="bold" color="cyan">
                     Venue{" "}
                   </Box>
-                  {event?.venue_id > 0 ? event.venue_name : event.venue + " " + event.city}
+                  {event?.venue_id > 0
+                    ? event.venue_name
+                    : event.venue + " " + event.city}
                 </Text>
                 {event?.venue_id > 0 && (
                   <>

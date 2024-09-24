@@ -7,28 +7,9 @@ import {
   Heading,
   Button,
   Image,
-  // Text,
-  // MenuItem,
-  // Menu,
-  // MenuButton,
-  // MenuList,
 } from "@chakra-ui/react";
 import { IProduct, useProfile } from "../../../../hooks/useProfile";
 import { useNavigate, useParams } from "react-router-dom";
-/* import { BiLike, BiTrash } from "react-icons/bi";
-  import { FiShare, FiMoreVertical } from "react-icons/fi";
-  
-  type PostMenuProps = {
-    icon: React.ElementType;
-    label: string;
-  };
-  
-  const PostMenu = ({ icon, label }: PostMenuProps) => (
-    <MenuItem py="10px" aria-label={label}>
-      <Box as={icon} size="14px" mr="8px" />
-      <Text>{label}</Text>
-    </MenuItem>
-  ); */
 
 type ProductCardProps = {
   product: IProduct;
