@@ -3,7 +3,7 @@ const config = require("../config");
 const SparkPost = require('sparkpost'); 
 const client = new SparkPost( config.nodeserver.sparkpost_api_key , { 
     endpoint:'https://api.eu.sparkpost.com:443',
-    /* debug: true, */
+    /* debug: false, */
 }); 
 const fs = require("fs");
 const logger = require("./logger");
@@ -20,7 +20,7 @@ mailer.email = {
 mailer.send = function(email,callback) {
     client.transmissions.send({
         options: {
-            /* sandbox: true */
+            /* sandbox: false */
         },
         content: {
             from: email.from,

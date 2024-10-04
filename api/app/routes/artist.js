@@ -14,7 +14,7 @@ router.get("/explore", function (req, res) {
     let params = {
       type: "explore",
       start: req.query["_start"] || 0,
-      limit: 16, // req.query['_length'] || req.query['_limit'] ||  16,
+      limit: 16, 
       type: req.query["_type"] || 0,
     };
     djprofile.getDjProfiles(params, function (result) {

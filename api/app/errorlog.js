@@ -8,7 +8,9 @@ errorlog.write = function (error) {
   fs.appendFile(
     logFile,
     JSON.stringify(error, Object.getOwnPropertyNames(error)) + "\n",
-    function (err) {}
+    function (err) {
+      console.log("error----", err)
+    }
   );
 };
 

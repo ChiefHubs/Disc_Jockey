@@ -37,11 +37,7 @@ const PrivateRoutes: FunctionComponent<PrivateRoutesProps> = () => {
   };
 
   if (isLoading) {
-    return (
-      <>
-        <Spinner />
-      </>
-    );
+    return <Spinner />;
   }
 
   if (!user) {
@@ -86,12 +82,24 @@ const PrivateRoutes: FunctionComponent<PrivateRoutesProps> = () => {
           eventTimeout: 1000,
           eventCallback: function (id: string) {
             if (id == "GTM-MXLNMK2") {
-              navigate(redirect ? (new URL(redirect).pathname == "/" ? "/feed" : new URL(redirect).pathname) : "/feed");
+              navigate(
+                redirect
+                  ? new URL(redirect).pathname == "/"
+                    ? "/feed"
+                    : new URL(redirect).pathname
+                  : "/feed"
+              );
             }
           },
         });
       } else {
-        navigate(redirect ? (new URL(redirect).pathname == "/" ? "/feed" : new URL(redirect).pathname) : "/feed");
+        navigate(
+          redirect
+            ? new URL(redirect).pathname == "/"
+              ? "/feed"
+              : new URL(redirect).pathname
+            : "/feed"
+        );
       }
     }
     return <Outlet />;
