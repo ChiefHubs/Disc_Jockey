@@ -97,12 +97,16 @@ const useProfile = (username: string) => {
   });
 };
 
-const getPurchaseLinkWithPurchase = async (purchase: any) => {  
-  const res = await apiClient.post(`/purchase`,purchase);
+const getPurchaseLinkWithPurchase = async (purchase: any) => {
+  const res = await apiClient.post(`/purchase`, purchase);
   return res.data.result;
 };
 
-const getPurchaseLink = async (username: string, type: string, redirect_url?: string) => {  
+const getPurchaseLink = async (
+  username: string,
+  type: string,
+  redirect_url?: string
+) => {
   const res = await apiClient.get(
     `/artist/${username}/membership/link?_type=${type}&_redirect_url=${redirect_url}`
   );
@@ -118,21 +122,23 @@ const getMySubscriptionDetails = (query: {
       return res.data.result;
     });
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   return useQuery<ISubscription[], Error>({
     queryKey: [query, "subscriptions"],
     queryFn: () => fetchSubscriptionDetails(),
   });
 };
 
-const useProducts = (profile_url: string, query: { pageSize: number, productType?: string }) => {
+const useProducts = (
+  profile_url: string,
+  query: { pageSize: number; productType?: string }
+) => {
   const fetchProducts = (pageParam: number) => {
     return apiClient
       .get<{ result: IProduct[] }>("/artist/" + profile_url + "/products", {
         params: {
           _start: (pageParam - 1) * query.pageSize,
           _limit: query.pageSize,
-          ...(query.productType && { _type: query.productType })
+          ...(query.productType && { _type: query.productType }),
         },
       })
       .then((res) => {

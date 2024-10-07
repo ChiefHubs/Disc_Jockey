@@ -36,7 +36,6 @@ export interface Purchase {
   label?: string;
   credits?: string;
   purchased_date: string;
-  // TODO: sample fields to render on UI, replace with real data after API is updated
   product_name?: string;
   author_name?: string;
 }
@@ -78,7 +77,6 @@ const getMyPurchases = (query: { page: number; pageSize: number }) => {
       return res.data.result;
     });
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   return useQuery<Purchase[], Error>({
     queryKey: [query, "purchase"],
     queryFn: () => fetchSubscriptionDetails(),

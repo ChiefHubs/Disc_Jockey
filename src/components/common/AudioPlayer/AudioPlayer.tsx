@@ -146,7 +146,7 @@ export const AudioPlayer = ({
           top="0"
           gap={{ base: "10px", sm: "0px" }}
         >
-          <Box p="10px" cursor={"pointer"} color="#fff" fontSize={"22px"}></Box>
+          <Box p="12px" cursor={"pointer"} color="#fff" fontSize={"20px"}></Box>
         </HStack>
         <Flex
           w={{ base: "100%", sm: "30%" }}
@@ -197,8 +197,8 @@ export const AudioPlayer = ({
               minW="120px"
               objectFit={"cover"}
               borderRadius="20px"
-              py="10px"
-              px="10px"
+              py="12px"
+              px="8px"
             />
             {thumbnail != "" && (
               <>
