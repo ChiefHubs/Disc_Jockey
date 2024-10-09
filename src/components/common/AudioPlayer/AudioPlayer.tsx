@@ -191,8 +191,8 @@ export const AudioPlayer = ({
               fallbackSrc="https://files.djfan.app/images/no-image-found.png"
               src={thumbnail}
               alt=""
-              width="170px"
-              height="170px"
+              width="165px"
+              height="165px"
               minH="120px"
               minW="120px"
               objectFit={"cover"}
@@ -259,7 +259,7 @@ export const AudioPlayer = ({
         <VStack w={{ base: "100%", sm: "65%" }}>
           <Text
             lineHeight={"1em"}
-            fontSize={"20px"}
+            fontSize={"18px"}
             fontWeight="600"
             color="#fff"
             pb="4px"
@@ -281,7 +281,7 @@ export const AudioPlayer = ({
             gap="0px"
             w="100%"
           >
-            <Flex pl={{ base: "10px", md: "none" }} pr="15px" color="#fff">
+            <Flex pl={{ base: "10px", md: "none" }} pr="16px" color="#fff">
               <Duration seconds={duration * played} />{" "}
               <Text
                 as="span"
@@ -341,7 +341,7 @@ export const AudioPlayer = ({
                 {muted ? <VscMute /> : <VscUnmute />}
               </Button>
               {show && (
-                <Box position="absolute" bottom="30px" right="15px">
+                <Box position="absolute" bottom="30px" right="16px">
                   <Slider defaultValue={30} orientation="vertical" minH="60px">
                     <SliderTrack>
                       <SliderFilledTrack />
