@@ -18,7 +18,7 @@ router.get("/user", middleware.requireUserKey, function (req, res) {
       }
     });
   } catch (error) {
-    console.log("error-------:"error)
+    console.log("error-------:",error)
     logger.log(error);
     return res.status(500).json({ result: false, message: "error" });
   }
